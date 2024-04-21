@@ -48,14 +48,14 @@ resource "google_compute_instance" "vm_instance" {
     #!/bin/bash
     sudo apt-get update
     sudo apt-get install -y gcloud
-    echo '${local.script_content}' > /tmp/script.sh
-    echo '${local.script_content}' > /tmp/script.sh
-    chmod +x /tmp/script.sh
-    chmod +x /tmp/date_flag
+    echo '${local.script_content}' > /tmp/install_docker.sh
+    echo '${local.file_content}' > /tmp/date_flag.py
+    chmod +x /tmp/install_docker.sh
+    chmod +x /tmp/date_flag.py
     #Below command is just to show root is executing this script
     #whoami >> /usr/bin/runner_id
-    bash /tmp/date_flag
-    bash /tmp/script.sh
+    bash /tmp/install_docker.sh
+    /usr/bin/python /tmp/date_flag.py
   EOF
 }
 
