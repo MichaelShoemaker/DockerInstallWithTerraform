@@ -15,13 +15,14 @@ resource "google_compute_instance" "vm_instance" {
 
   boot_disk {
     initialize_params {
+      #Find these in gcloud sdk by running gcloud image list|grep <what you are looking for e.g. ubuntu>
       image = "ubuntu-2004-focal-v20240307b"
     }
   }
 
   network_interface {
     network = "default"
-    #You need this in order to get the public IP printed
+    #You need access_config in order to get the public IP printed
     access_config{
 
     }
@@ -34,7 +35,11 @@ resource "google_compute_instance" "vm_instance" {
     sudo apt-get install -y gcloud
     echo '${local.script_content}' > /tmp/script.sh
     chmod +x /tmp/script.sh
-    whoami >> /usr/bin/runner_id
+    #Below command is just to show root is executing this script
+    #whoami >> /usr/bin/runner_id
+    current_datetime=$(date +"%Y-%m-%d_%H-%M-%S")
+    # Create a file with the generated name
+    touch "${current_datetime}.txt"
     bash /tmp/script.sh
   EOF
 }
