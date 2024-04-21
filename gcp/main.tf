@@ -1,4 +1,18 @@
+#You don't really need required_providers for this VM, but it is best pactice :-/
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version >= "4.51.0"
+    }
+  }
+}
+
+
 provider "google" {
+  #Uncomment the credentials here and in the variables file if you are using a service account json file
+  #Insteal of gcloud auth application-default login
+  # credentials = file(var.credentials)
   project = var.project
   region  = var.region
 }

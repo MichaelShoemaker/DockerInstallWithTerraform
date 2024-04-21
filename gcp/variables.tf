@@ -1,7 +1,8 @@
-variable "credentials" {
-  description = "My Credentials"
-  default     = "<Path to your Service Account json file>"
-}
+
+# variable "credentials" {
+#   description = "My Credentials"
+#   default     = "<Path to your Service Account json file>"
+# }
 
 
 variable "project" {
