@@ -20,7 +20,7 @@ provider "google" {
 # Read in script file
 locals {
   script_content = file("../DockerInstall/install_docker.sh")
-  flag_content = file("../date_flag")
+  flag_content = file("../date_flag.py")
 }
 
 resource "google_compute_instance" "vm_instance" {
@@ -46,16 +46,21 @@ resource "google_compute_instance" "vm_instance" {
   # Use the content of the script file in the metadata_startup_script
   metadata_startup_script = <<-EOF
     #!/bin/bash
-    sudo apt-get update
-    sudo apt-get install -y gcloud
-    echo '${local.script_content}' > /tmp/install_docker.sh
-    echo '${local.file_content}' > /tmp/date_flag.py
-    chmod +x /tmp/install_docker.sh
-    chmod +x /tmp/date_flag.py
-    #Below command is just to show root is executing this script
-    #whoami >> /usr/bin/runner_id
-    bash /tmp/install_docker.sh
-    /usr/bin/python /tmp/date_flag.py
+    if [ ! -f /var/run/flag.txt ];
+    then
+      sudo apt-get update
+      sudo apt-get install -y gcloud
+      echo '${local.script_content}' > /tmp/install_docker.sh
+      echo '${local.flag_content}' > /tmp/date_flag.py
+      chmod +x /tmp/install_docker.sh
+      chmod +x /tmp/date_flag.py
+      #Below command is just to show root is executing this script
+      #whoami >> /usr/bin/runner_id
+      bash /tmp/install_docker.sh
+      /usr/bin/python3 /tmp/date_flag.py
+    else
+      exit 0
+    fi
   EOF
 }
 
