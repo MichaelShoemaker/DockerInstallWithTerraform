@@ -3,7 +3,7 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version ">= 4.51.0"
+      version = ">= 4.51.0"
     }
   }
 }
@@ -19,7 +19,7 @@ provider "google" {
 
 # Read in script file
 locals {
-  script_content = file("./install_docker.sh")
+  script_content = file("../DockerInstall/install_docker.sh")
 }
 
 resource "google_compute_instance" "vm_instance" {
