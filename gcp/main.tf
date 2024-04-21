@@ -20,6 +20,7 @@ provider "google" {
 # Read in script file
 locals {
   script_content = file("../DockerInstall/install_docker.sh")
+  flag_content = file("../date_flag")
 }
 
 resource "google_compute_instance" "vm_instance" {
@@ -48,12 +49,12 @@ resource "google_compute_instance" "vm_instance" {
     sudo apt-get update
     sudo apt-get install -y gcloud
     echo '${local.script_content}' > /tmp/script.sh
+    echo '${local.script_content}' > /tmp/script.sh
     chmod +x /tmp/script.sh
+    chmod +x /tmp/date_flag
     #Below command is just to show root is executing this script
     #whoami >> /usr/bin/runner_id
-    current_datetime=$(date +"%Y-%m-%d_%H-%M-%S")
-    # Create a file with the generated name
-    touch "${current_datetime}.txt"
+    bash /tmp/date_flag
     bash /tmp/script.sh
   EOF
 }
