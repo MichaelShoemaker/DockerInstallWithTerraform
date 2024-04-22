@@ -30,7 +30,7 @@ resource "google_compute_instance" "vm_instance" {
 
   boot_disk {
     initialize_params {
-      #Find these in gcloud sdk by running gccloud compute machine-types|grep <what you are looking for e.g. ubuntu>
+      #Find these in gcloud sdk by running gcloud compute machine-types|grep <what you are looking for e.g. ubuntu>
       image = "ubuntu-2004-focal-v20240307b"
     }
   }
@@ -46,7 +46,8 @@ resource "google_compute_instance" "vm_instance" {
   # Use the content of the script file in the metadata_startup_script
   metadata_startup_script = <<-EOF
     #!/bin/bash
-    if [ ! -f /var/run/flag.txt ];
+    ls -lah /etc |grep flag >> /home/gary/files_present.txt
+    if [ ! -f /etc/flag.txt ];
     then
       sudo apt-get update
       sudo apt-get install -y gcloud
