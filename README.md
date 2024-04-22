@@ -19,9 +19,9 @@ You will need to authenticate with gcloud using:<br>
 ```gcloud auth application-default login```<br><br>
 or if you are using a service account, add the path to your json key file in the variables.tf file<br><br>
 
-You can then simply run<br><br>
+You can then simply run<br>
 ```terraform init```<br>
-```terraform apply```<br>
+```terraform apply```<br><br>
 And then connect to the instance using the IP Address output
 
 ### TODO
@@ -29,3 +29,5 @@ Need to create a terraform file for AWS
 
 Add section to add SSH Key in terraform files
 
+## Video Walkthrough:
+Coming soon
