@@ -30,7 +30,7 @@ resource "google_compute_instance" "vm_instance" {
 
   boot_disk {
     initialize_params {
-      #Find these in gcloud sdk by running gcloud compute machine-types|grep <what you are looking for e.g. ubuntu>
+      #Find these in gcloud sdk by running gcloud compute images list|grep <what you are looking for e.g. ubuntu>
       image = "ubuntu-2004-focal-v20240307b"
     }
   }
