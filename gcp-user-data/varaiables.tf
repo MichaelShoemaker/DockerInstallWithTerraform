@@ -7,15 +7,15 @@
 
 variable "project" {
   description = "Project"
-  default     = "kestra-demo"
+  default     = "<Your Project>"
 }
 
 variable "region" {
   description = "Region"
-  default     = "us-central1"
+  default     = "<Your Region>"
 }
 
 variable "zone" {
     description = "Zone"
-    default = "us-central1-a"
+    default = "<Your Zone>"
 }
